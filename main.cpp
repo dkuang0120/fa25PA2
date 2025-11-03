@@ -113,20 +113,24 @@ int buildEncodingTree(int nextFree) {
 void generateCodes(int root, string codes[]) {
     if (root < 0) return;
 
+
     stack<pair<int, string>> st;
     st.push({root, ""});
+
 
     while (!st.empty()) {
         auto cur = st.top(); st.pop();
         int node = cur.first;
         string path = cur.second;
 
+
         int leftChild = leftArr[node];
         int rightChild = rightArr[node];
         bool isLeaf = (leftChild == -1 && rightChild == -1);
 
+
         if (isLeaf) {
-            if (path.empty()) path = "0";        // edge case: only one symbol
+            if (path.empty()) path = "0";
             char c = charArr[node];
             if (c >= 'a' && c <= 'z') {
                 codes[c - 'a'] = path;
@@ -137,6 +141,8 @@ void generateCodes(int root, string codes[]) {
         }
     }
 }
+
+
 
 // Step 5: Print table and encoded message
 void encodeMessage(const string& filename, string codes[]) {
