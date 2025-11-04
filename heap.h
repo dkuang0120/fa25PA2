@@ -15,28 +15,28 @@ struct MinHeap {
     MinHeap() { size = 0; }
 
     void push(int idx, int weightArr[]) {
-        if (size >= 64) {
+        if (size >= 64) { //edge case if heap is full
             return;
         }
-        data[size] = idx;
-        upheap(size, weightArr);
-        size++;
+        data[size] = idx; // place element at the end
+        upheap(size, weightArr); // move it up until heap is proper
+        size++; // increase heap size
     }
 
     int pop(int weightArr[]) {
         // TODO: remove and return smallest index
         // Replace root with last element, then call downheap()
-        if (size == 0) {
+        if (size == 0) { // edge case if heap is empty
             return -1;
         }
-        int root = data[0];
-        data[0] = data[size - 1];
-        size--;
-        if (size > 0) {
+        int root = data[0]; // root holds smallest element
+        data[0] = data[size - 1]; // move last element to root position
+        size--; // decrement size once element is removed
+        if (size > 0) { // push structure down if heap is not empty
             downheap(0, weightArr);
         }
 
-        return root;
+        return root; // return smallest index
     }
 
     void upheap(int pos, int weightArr[]) {
